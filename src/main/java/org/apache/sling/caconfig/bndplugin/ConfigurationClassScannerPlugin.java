@@ -35,7 +35,7 @@ import aQute.service.reporter.Reporter;
 
 /**
  * Scans the classpath of the bundle for annotation classes with the "Configuration" annotation
- * from the Sling Context-Aware Configuraiton API.
+ * from the Sling Context-Aware Configuration API.
  * All class names found are stored in a bundle header for processing them at runtime and reading their metadata.
  */
 public class ConfigurationClassScannerPlugin implements AnalyzerPlugin, Plugin {
