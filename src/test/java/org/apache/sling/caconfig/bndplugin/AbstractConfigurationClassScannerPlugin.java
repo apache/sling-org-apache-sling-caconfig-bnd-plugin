@@ -33,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import aQute.bnd.osgi.Builder;
 import aQute.bnd.osgi.Jar;
@@ -42,19 +42,19 @@ import aQute.service.reporter.Reporter;
 
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractConfigurationClassScannerPlugin {
-    
+
     protected Builder builder;
 
     @Before
     public final void setUp() throws Exception {
         builder = new Builder();
-        
+
         Jar classesDirJar = new Jar("test.jar", new File("target/test-classes"));
         classesDirJar.setManifest(new Manifest());
         builder.setJar(classesDirJar);
-        
+
         builder.setSourcepath(new File[] { new File("src/test/java") } );
-        
+
         Plugin plugin = new ConfigurationClassScannerPlugin();
         plugin.setReporter(mock(Reporter.class));
         plugin.setProperties(new HashMap<String,String>());
@@ -68,7 +68,7 @@ public abstract class AbstractConfigurationClassScannerPlugin {
         }
         builder.close();
     }
-    
+
     protected final void assertHeader(Jar jar, String headerName, String... headerValues) throws Exception {
         Set<String> expectedValues = new HashSet<>(Arrays.asList(headerValues));
         String[] actual = StringUtils.split(jar.getManifest().getMainAttributes().getValue(headerName), ",");
