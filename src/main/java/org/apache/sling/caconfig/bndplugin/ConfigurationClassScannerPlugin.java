@@ -39,11 +39,11 @@ import aQute.service.reporter.Reporter;
  * All class names found are stored in a bundle header for processing them at runtime and reading their metadata.
  */
 public class ConfigurationClassScannerPlugin implements AnalyzerPlugin, Plugin {
-    
+
     static final String CONFIGURATION_ANNOTATION_CLASS = "org.apache.sling.caconfig.annotation.Configuration";
-    
+
     static final String CONFIGURATION_CLASSES_HEADER = "Sling-ContextAware-Configuration-Classes";
-    
+
     private Reporter reporter;
 
     @Override
@@ -58,7 +58,7 @@ public class ConfigurationClassScannerPlugin implements AnalyzerPlugin, Plugin {
 
     @Override
     public boolean analyzeJar(Analyzer analyzer) throws Exception {
-        
+
         // get all annotation classes from this project with Configuration annotation
         Collection<String> classNames = getClassesWithAnnotation(CONFIGURATION_ANNOTATION_CLASS, analyzer);
 
@@ -66,11 +66,11 @@ public class ConfigurationClassScannerPlugin implements AnalyzerPlugin, Plugin {
         if (!classNames.isEmpty()) {
             analyzer.set(CONFIGURATION_CLASSES_HEADER, StringUtils.join(classNames, ","));
         }
-        
+
         // we did not change any classes - no need to re-analyze
         return false;
     }
-    
+
     /**
      * Get all classes that implement the given annotation via bnd Analyzer.
      * @param analyzer Analyzer
@@ -93,5 +93,5 @@ public class ConfigurationClassScannerPlugin implements AnalyzerPlugin, Plugin {
         }
         return classNames;
     }
-    
+
 }

@@ -18,7 +18,7 @@
  */
 package org.apache.sling.caconfig.bndplugin;
 
-import static org.apache.sling.caconfig.bndplugin.ConfigurationClassScannerPlugin.*;
+import static org.apache.sling.caconfig.bndplugin.ConfigurationClassScannerPlugin.CONFIGURATION_CLASSES_HEADER;
 
 import org.junit.Test;
 
@@ -29,11 +29,11 @@ public class GenerateHeaderTest extends AbstractConfigurationClassScannerPlugin 
     @Test
     public void testBuild() throws Exception {
         Jar jar = builder.build();
-        
-        assertHeader(jar, CONFIGURATION_CLASSES_HEADER, 
+
+        assertHeader(jar, CONFIGURATION_CLASSES_HEADER,
                 "dummy.example.pkg1.Config1",
                 "dummy.example.pkg1.Config2",
-                "dummy.example.pkg1.sub1.Config3");        
+                "dummy.example.pkg1.sub1.Config3");
     }
 
 }
