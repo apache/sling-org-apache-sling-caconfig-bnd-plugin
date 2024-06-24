@@ -23,8 +23,6 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import org.apache.commons.lang3.StringUtils;
-
 import aQute.bnd.osgi.Analyzer;
 import aQute.bnd.osgi.Clazz;
 import aQute.bnd.osgi.Clazz.QUERY;
@@ -32,6 +30,7 @@ import aQute.bnd.osgi.Instruction;
 import aQute.bnd.service.AnalyzerPlugin;
 import aQute.bnd.service.Plugin;
 import aQute.service.reporter.Reporter;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Scans the classpath of the bundle for annotation classes with the "Configuration" annotation
@@ -87,11 +86,9 @@ public class ConfigurationClassScannerPlugin implements AnalyzerPlugin, Plugin {
                     classNames.add(clazz.getClassName().getFQN());
                 }
             }
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             reporter.exception(ex, "Error querying for classes with annotation: " + annotationClassName);
         }
         return classNames;
     }
-
 }

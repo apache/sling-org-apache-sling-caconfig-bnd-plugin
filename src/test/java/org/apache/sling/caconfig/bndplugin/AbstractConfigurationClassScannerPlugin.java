@@ -18,10 +18,6 @@
  */
 package org.apache.sling.caconfig.bndplugin;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-import static org.mockito.Mockito.mock;
-
 import java.io.File;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,16 +25,19 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.jar.Manifest;
 
+import aQute.bnd.osgi.Builder;
+import aQute.bnd.osgi.Jar;
+import aQute.bnd.service.Plugin;
+import aQute.service.reporter.Reporter;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import aQute.bnd.osgi.Builder;
-import aQute.bnd.osgi.Jar;
-import aQute.bnd.service.Plugin;
-import aQute.service.reporter.Reporter;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
 public abstract class AbstractConfigurationClassScannerPlugin {
@@ -53,11 +52,11 @@ public abstract class AbstractConfigurationClassScannerPlugin {
         classesDirJar.setManifest(new Manifest());
         builder.setJar(classesDirJar);
 
-        builder.setSourcepath(new File[] { new File("src/test/java") } );
+        builder.setSourcepath(new File[] {new File("src/test/java")});
 
         Plugin plugin = new ConfigurationClassScannerPlugin();
         plugin.setReporter(mock(Reporter.class));
-        plugin.setProperties(new HashMap<String,String>());
+        plugin.setProperties(new HashMap<String, String>());
         builder.addBasicPlugin(plugin);
     }
 
@@ -71,9 +70,9 @@ public abstract class AbstractConfigurationClassScannerPlugin {
 
     protected final void assertHeader(Jar jar, String headerName, String... headerValues) throws Exception {
         Set<String> expectedValues = new HashSet<>(Arrays.asList(headerValues));
-        String[] actual = StringUtils.split(jar.getManifest().getMainAttributes().getValue(headerName), ",");
+        String[] actual =
+                StringUtils.split(jar.getManifest().getMainAttributes().getValue(headerName), ",");
         Set<String> actualValues = new HashSet<>(Arrays.asList(actual));
         assertEquals(expectedValues, actualValues);
     }
-
 }

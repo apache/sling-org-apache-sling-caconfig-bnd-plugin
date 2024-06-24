@@ -21,6 +21,4 @@ package dummy.example.pkg1;
 import org.apache.sling.caconfig.annotation.Configuration;
 
 @Configuration
-public @interface Config2 {
-
-}
+public @interface Config2 {}
